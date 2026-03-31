@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khurshid Shaik — Data & AI Analyst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0c0f14;
+            --bg-card: #14181f;
+            --bg-card-hover: #1a1f28;
+            --accent: #4fd1c5;
+            --accent-glow: rgba(79,209,197,0.15);
+            --accent-dim: #2c7a73;
+            --text: #e2e8f0;
+            --text-muted: #8892a4;
+            --text-bright: #ffffff;
+            --border: rgba(255,255,255,0.06);
+            --radius: 14px;
+            --radius-sm: 8px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(12,15,20,0.82);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+        }
+        .nav-inner {
+            max-width: 1140px; margin: auto;
+            display: flex; align-items: center; justify-content: space-between; height: 68px;
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem; font-weight: 700;
+            color: var(--text-bright); text-decoration: none; letter-spacing: -0.02em;
+        }
+        .nav-logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 0.25rem; align-items: center; }
+        .nav-links a {
+            color: var(--text-muted); text-decoration: none;
+            font-size: 0.88rem; font-weight: 500;
+            padding: 0.45rem 0.9rem; border-radius: 6px; transition: all 0.25s;
+        }
+        .nav-links a:hover { color: var(--text-bright); background: rgba(255,255,255,0.05); }
+        .nav-links a.cta {
+            background: var(--accent); color: var(--bg);
+            font-weight: 700; margin-left: 0.5rem;
+        }
+        .nav-links a.cta:hover { background: #5ee8db; }
+
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; background: none; border: none; padding: 6px;
+        }
+        .hamburger span {
+            width: 24px; height: 2px; background: var(--text);
+            border-radius: 2px; transition: 0.3s;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 6rem 2rem 4rem; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+            top: -100px; right: -200px; pointer-events: none;
+        }
+        .hero::after {
+            content: ''; position: absolute;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(99,102,241,0.08), transparent 70%);
+            bottom: -150px; left: -200px; pointer-events: none;
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 720px; }
+
+        .hero-photo {
+            width: 130px; height: 130px; border-radius: 50%;
+            border: 3px solid var(--accent); margin: 0 auto 2rem;
+            overflow: hidden; background: var(--bg-card);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-photo .placeholder {
+            font-size: 2.5rem; color: var(--accent);
+            font-family: 'Playfair Display', serif; font-weight: 700;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent-glow); border: 1px solid rgba(79,209,197,0.25);
+            color: var(--accent); font-size: 0.78rem; font-weight: 700;
+            padding: 0.35rem 1rem; border-radius: 100px;
+            letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1.2rem;
+        }
+        .badge::before { content: '\2726 '; }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 5.5vw, 3.8rem); font-weight: 800;
+            color: var(--text-bright); line-height: 1.15;
+            margin-bottom: 1rem; letter-spacing: -0.02em;
+        }
+        h1 em {
+            font-style: normal;
+            background: linear-gradient(135deg, var(--accent), #63b3ed);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+
+        .hero-sub { font-size: 1.08rem; color: var(--text-muted); max-width: 560px; margin: 0 auto 2rem; }
+        .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.75rem 1.6rem; border-radius: 8px;
+            font-weight: 600; font-size: 0.92rem; text-decoration: none;
+            transition: all 0.3s; cursor: pointer; border: none; font-family: inherit;
+        }
+        .btn-primary { background: var(--accent); color: var(--bg); }
+        .btn-primary:hover { background: #5ee8db; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(79,209,197,0.25); }
+        .btn-outline { background: transparent; color: var(--text); border: 1.5px solid rgba(255,255,255,0.15); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+        /* SECTIONS */
+        section { padding: 5rem 2rem; }
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        .section-label {
+            font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.6rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 700;
+            color: var(--text-bright); margin-bottom: 1rem; letter-spacing: -0.01em;
+        }
+        .section-desc { color: var(--text-muted); max-width: 600px; margin-bottom: 3rem; font-size: 1rem; }
+
+        /* ABOUT */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+        .about-text p { margin-bottom: 1rem; color: var(--text-muted); }
+        .about-text p strong { color: var(--text); }
+
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .stat-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.5rem; text-align: center; transition: 0.3s;
+        }
+        .stat-card:hover { border-color: rgba(79,209,197,0.2); transform: translateY(-3px); }
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 0.3rem;
+        }
+        .stat-label { font-size: 0.82rem; color: var(--text-muted); }
+
+        .ai-note {
+            margin-top: 2rem; padding: 1.2rem 1.5rem;
+            background: rgba(79,209,197,0.06); border: 1px solid rgba(79,209,197,0.15);
+            border-radius: var(--radius-sm); font-size: 0.9rem; color: var(--text-muted);
+            display: flex; gap: 0.7rem; align-items: flex-start;
+        }
+        .ai-note span { color: var(--accent); font-size: 1.2rem; flex-shrink: 0; }
+
+        /* SKILLS */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1.2rem; }
+        .skill-group {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.6rem; transition: 0.3s;
+        }
+        .skill-group:hover { border-color: rgba(79,209,197,0.2); background: var(--bg-card-hover); }
+        .skill-group-title {
+            font-weight: 700; font-size: 0.92rem; color: var(--text-bright);
+            margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .skill-group-title .icon { color: var(--accent); font-size: 1.1rem; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .skill-tag {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+            color: var(--text-muted); font-size: 0.78rem;
+            padding: 0.3rem 0.7rem; border-radius: 5px; transition: 0.2s;
+        }
+        .skill-tag:hover { color: var(--accent); border-color: rgba(79,209,197,0.3); }
+
+        /* EXPERIENCE */
+        .timeline { position: relative; }
+        .timeline::before {
+            content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--accent-dim), transparent);
+        }
+        .timeline-item { position: relative; padding-left: 56px; margin-bottom: 2.5rem; }
+        .timeline-dot {
+            position: absolute; left: 13px; top: 6px;
+            width: 16px; height: 16px; border-radius: 50%;
+            background: var(--bg); border: 3px solid var(--accent);
+        }
+        .timeline-date {
+            font-size: 0.78rem; font-weight: 600; color: var(--accent);
+            text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.3rem;
+        }
+        .timeline-role { font-weight: 700; font-size: 1.08rem; color: var(--text-bright); margin-bottom: 0.15rem; }
+        .timeline-company { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+        .timeline-bullets { list-style: none; }
+        .timeline-bullets li {
+            font-size: 0.88rem; color: var(--text-muted);
+            padding-left: 1.1rem; position: relative; margin-bottom: 0.4rem;
+        }
+        .timeline-bullets li::before { content: '\25B8'; position: absolute; left: 0; color: var(--accent-dim); }
+
+        /* PROJECTS */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.4rem; }
+        .project-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.8rem; transition: 0.3s;
+            display: flex; flex-direction: column;
+        }
+        .project-card:hover { border-color: rgba(79,209,197,0.25); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+        .project-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            background: var(--accent-glow); display: flex; align-items: center;
+            justify-content: center; font-size: 1.3rem; margin-bottom: 1rem;
+        }
+        .project-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--text-bright); margin-bottom: 0.5rem; }
+        .project-card p { font-size: 0.88rem; color: var(--text-muted); flex: 1; margin-bottom: 1rem; }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+        .project-tags span {
+            font-size: 0.72rem; background: rgba(79,209,197,0.08);
+            color: var(--accent); padding: 0.2rem 0.55rem; border-radius: 4px; font-weight: 600;
+        }
+
+        /* CERTIFICATIONS */
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+        .cert-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.4rem 1.6rem;
+            display: flex; gap: 1rem; align-items: center; transition: 0.3s;
+        }
+        .cert-card:hover { border-color: rgba(79,209,197,0.2); transform: translateY(-2px); }
+        .cert-icon {
+            width: 44px; height: 44px; flex-shrink: 0; border-radius: 10px;
+            background: var(--accent-glow); display: flex; align-items: center;
+            justify-content: center; font-size: 1.3rem;
+        }
+        .cert-info h4 { font-size: 0.92rem; font-weight: 700; color: var(--text-bright); margin-bottom: 0.15rem; }
+        .cert-info p { font-size: 0.78rem; color: var(--text-muted); }
+
+        /* CONTACT */
+        .contact-section { text-align: center; background: linear-gradient(180deg, var(--bg) 0%, rgba(79,209,197,0.04) 100%); }
+        .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+        .contact-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 1.2rem 1.8rem; text-decoration: none;
+            color: var(--text); display: flex; align-items: center; gap: 0.7rem;
+            transition: 0.3s; font-size: 0.92rem;
+        }
+        .contact-card:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+        .contact-card .c-icon { font-size: 1.2rem; }
+
+        /* FOOTER */
+        footer {
+            text-align: center; padding: 2.5rem 2rem;
+            border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--text-muted);
+        }
+        footer a { color: var(--accent); text-decoration: none; }
+
+        /* ANIMATIONS */
+        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; position: absolute; top: 68px; left: 0; right: 0;
+                background: rgba(12,15,20,0.96); backdrop-filter: blur(18px);
+                flex-direction: column; padding: 1rem; border-bottom: 1px solid var(--border);
+            }
+            .nav-links.active { display: flex; }
+            .hamburger { display: flex; }
+            .about-grid { grid-template-columns: 1fr; }
+            .hero { min-height: auto; padding: 8rem 1.5rem 4rem; }
+            section { padding: 3.5rem 1.5rem; }
+            .projects-grid, .skills-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="#home" class="nav-logo">K<span>.</span>Shaik</a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links">
+            <a href="#home" onclick="closeNav()">Home</a>
+            <a href="#about" onclick="closeNav()">About</a>
+            <a href="#skills" onclick="closeNav()">Skills</a>
+            <a href="#experience" onclick="closeNav()">Experience</a>
+            <a href="#projects" onclick="closeNav()">Projects</a>
+            <a href="#certifications" onclick="closeNav()">Certifications</a>
+            <a href="#contact" onclick="closeNav()" class="cta">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="hero-content fade-up">
+        <div class="hero-photo">
+            <!-- REPLACE with your photo: <img src="your-photo.jpg" alt="Khurshid Shaik"> -->
+            <div class="placeholder">KS</div>
+        </div>
+        <div class="badge">Data · Product · AI Analyst</div>
+        <h1>Turning Raw Data into<br><em>Decisions That Ship</em></h1>
+        <p class="hero-sub">5+ years transforming complex datasets into actionable insights using SQL, Python, cloud warehousing, and applied AI — in fast-moving agile environments.</p>
+        <div class="hero-btns">
+            <a href="#projects" class="btn btn-primary">View My Work &#8595;</a>
+            <a href="#contact" class="btn btn-outline">Get in Touch</a>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container fade-up">
+        <p class="section-label">About Me</p>
+        <h2 class="section-title">Why Hire Me?</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>I'm <strong>Khurshid Shaik</strong>, a Data, Product &amp; AI Analyst who thrives at the intersection of <strong>data engineering, product analytics, and applied AI</strong>. I don't just build dashboards — I define KPIs, run A/B experiments, build LLM-powered insight pipelines, and design end-to-end ETL workflows that drive real business decisions.</p>
+                <p>From <strong>Amazon</strong> to <strong>eBay</strong> and beyond, I've consolidated siloed systems, slashed reporting times, improved forecast accuracy, and embedded data-driven decision-making into sprint planning. My work directly impacts quarterly roadmaps, inventory strategy, and executive decisions.</p>
+                <p><strong>Education:</strong> M.S. Information Technology Management from UW–Milwaukee &amp; B.E. Electronics &amp; Communication Engineering from JNTU Kakinada, India.</p>
+                <div class="ai-note">
+                    <span>&#9889;</span>
+                    <div><strong>Built with AI:</strong> This portfolio was developed with the help of AI tools — reflecting my commitment to leveraging modern technology to produce polished, professional work efficiently. I actively use LLMs, prompt engineering, and AI pipelines in my day-to-day analytics work.</div>
+                </div>
+            </div>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">65%</div>
+                    <div class="stat-label">Pipeline Optimization</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">31%</div>
+                    <div class="stat-label">Forecast Error Reduced</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Stakeholders Served</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background: rgba(255,255,255,0.01);">
+    <div class="container fade-up">
+        <p class="section-label">Technical Skills</p>
+        <h2 class="section-title">What I Work With</h2>
+        <p class="section-desc">A deep, cross-functional toolkit spanning analytics, engineering, AI, and product strategy.</p>
+        <div class="skills-grid">
+            <div class="skill-group">
+                <div class="skill-group-title"><span class="icon">&#129302;</span> AI &amp; LLM</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">OpenAI API</span><span class="skill-tag">LangChain</span>
+                    <span class="skill-tag">Prompt Engineering</span><span class="skill-tag">RAG</span>
+                    <span class="skill-tag">Azure OpenAI</span><span class="skill-tag">Hugging Face</span>
+                    <span class="skill-tag">LLM Pipelines</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-title"><span class="icon">&#128200;</span> Product Analytics</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Funnel Analysis</span><span class="skill-tag">Retention Cohorts</span>
+                    <span class="skill-tag">User Segmentation</span><span class="skill-tag">A/B Testing</span>
+                    <span class="skill-tag">North Star Metrics</span><span class="skill-tag">DAU/MAU</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-title"><span class="icon">&#9881;&#65039;</span> Data Engineering</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Airflow</span><span class="skill-tag">dbt</span>
+                    <span class="skill-tag">AWS Glue</span><span class="skill-tag">Talend</span>
+                    <span class="skill-tag">ETL/ELT</span><span class="skill-tag">Data Modeling</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-title"><span class="icon">&#129504;</span> ML &amp; Forecasting</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">scikit-learn</span><span class="skill-tag">Prophet</span>
+                    <span class="skill-tag">XGBoost</span><span class="skill-tag">Feature Engineering</span>
+                    <span class="skill-tag">Regression</span><span class="skill-tag">Classification</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-title"><span class="icon">&#9729;&#65039;</span> Cloud &amp; Databases</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Snowflake</span><span class="skill-tag">BigQuery</span>
+                    <span class="skill-tag">Redshift</span><span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">MySQL</span><span class="skill-tag">AWS S3</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-title"><span class="icon">&#128202;</span> Visualization &amp; Analytics</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Tableau</span><span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">Looker</span><span class="skill-tag">Amplitude</span>
+                    <span class="skill-tag">Mixpanel</span><span class="skill-tag">Google Analytics</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-title"><span class="icon">&#128187;</span> Languages &amp; Tools</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">SQL</span><span class="skill-tag">Python</span>
+                    <span class="skill-tag">R</span><span class="skill-tag">Bash</span>
+                    <span class="skill-tag">Excel / VBA</span><span class="skill-tag">GitHub Copilot</span>
+                </div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-title"><span class="icon">&#129309;</span> Collaboration</div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Jira</span><span class="skill-tag">Agile / Scrum</span>
+                    <span class="skill-tag">Cross-functional Teams</span><span class="skill-tag">Stakeholder Mgmt</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+    <div class="container fade-up">
+        <p class="section-label">Professional Journey</p>
+        <h2 class="section-title">Where I've Made Impact</h2>
+        <p class="section-desc">From e-commerce giants to fast-growing startups — a track record of shipping data products that move the needle.</p>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Aug 2025 – Present</div>
+                <div class="timeline-role">Senior Data Analyst</div>
+                <div class="timeline-company">Perfect Solutions Inc. · Client: CORtracker360 · Remote, US</div>
+                <ul class="timeline-bullets">
+                    <li>Architected full-stack analytics: KPI framework, ML forecasting (scikit-learn + Prophet), and Power BI dashboards — replacing enterprise-wide manual spreadsheets.</li>
+                    <li>Built demand forecasting system cutting forecast error by 31% across 5 product lines.</li>
+                    <li>Consolidated 3 siloed systems into unified SQL warehouse — reporting time dropped from 12 hrs to 45 min.</li>
+                    <li>Built production LLM pipeline (OpenAI API) to auto-generate exec-ready SKU insight reports.</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Jul 2024 – Jul 2025</div>
+                <div class="timeline-role">Data Analyst</div>
+                <div class="timeline-company">eBay · Remote, US</div>
+                <ul class="timeline-bullets">
+                    <li>Defined success metrics for Pricing &amp; Merchandising; built Tableau/Looker dashboards used by 50+ stakeholders.</li>
+                    <li>Designed and ran A/B experiments on promotional features via Clickstream data.</li>
+                    <li>Optimized Snowflake &amp; BigQuery pipelines by 65%, unblocking 3 downstream product teams.</li>
+                    <li>Embedded data insights into Agile sprint planning with PMs and engineers.</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Aug 2020 – Dec 2022</div>
+                <div class="timeline-role">Operations Analyst</div>
+                <div class="timeline-company">Amazon · India</div>
+                <ul class="timeline-bullets">
+                    <li>Built Python demand forecasting model — reduced overstock 21% during Prime Day &amp; Diwali.</li>
+                    <li>Ran Clickstream A/B tests via Google Optimize — increased campaign ROI by 8%.</li>
+                    <li>Identified fulfillment bottlenecks via SQL &amp; Redshift — cut SLA breaches by 9%.</li>
+                    <li>Replaced static reports with real-time QuickSight &amp; Data Studio dashboards.</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Oct 2023 – May 2024</div>
+                <div class="timeline-role">Graduate Research Assistant</div>
+                <div class="timeline-company">Lubar College of Business, UW–Milwaukee</div>
+                <ul class="timeline-bullets">
+                    <li>Rebuilt alumni segmentation in SQL — corrected 28% data inflation.</li>
+                    <li>Flagged 12% STEM retention drop through statistical analysis before it reached leadership.</li>
+                    <li>Built Python Flask scheduling app used by 150+ faculty.</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Jul 2019 – Feb 2020</div>
+                <div class="timeline-role">Digital Marketing Intern</div>
+                <div class="timeline-company">DigitalDeepak.com · India</div>
+                <ul class="timeline-bullets">
+                    <li>Analyzed 50K+ user sessions — pinpointed week-one funnel drop-off; improved Day-7 retention by 7%.</li>
+                    <li>Built 5 live Power BI dashboards tracking acquisition, activation, and retention KPIs.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background: rgba(255,255,255,0.01);">
+    <div class="container fade-up">
+        <p class="section-label">Featured Work</p>
+        <h2 class="section-title">Projects That Drove Results</h2>
+        <p class="section-desc">Hands-on projects spanning forecasting, LLM pipelines, experimentation, and real-time dashboards.</p>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-icon">&#128302;</div>
+                <h3>Demand Forecasting Engine</h3>
+                <p>End-to-end ML pipeline using scikit-learn &amp; Prophet that cut forecast error by 31% across 5 product lines, directly reducing inventory overstock risk at scale.</p>
+                <div class="project-tags"><span>Python</span><span>scikit-learn</span><span>Prophet</span><span>SQL</span></div>
+            </div>
+            <div class="project-card">
+                <div class="project-icon">&#129504;</div>
+                <h3>LLM-Powered Insight Reports</h3>
+                <p>Production pipeline using OpenAI API to auto-generate executive-ready SKU insight reports — turning raw data findings into company-wide decisions in under 2 weeks.</p>
+                <div class="project-tags"><span>OpenAI API</span><span>Python</span><span>LLM Pipeline</span><span>Power BI</span></div>
+            </div>
+            <div class="project-card">
+                <div class="project-icon">&#129514;</div>
+                <h3>A/B Experimentation Platform</h3>
+                <p>Designed and ran A/B experiments on eBay's promotional features via Clickstream analysis. Findings directly shaped quarterly product roadmap decisions.</p>
+                <div class="project-tags"><span>A/B Testing</span><span>Clickstream</span><span>Snowflake</span><span>Tableau</span></div>
+            </div>
+            <div class="project-card">
+                <div class="project-icon">&#128200;</div>
+                <h3>Unified Data Warehouse</h3>
+                <p>Consolidated 3 siloed source systems into a single SQL data warehouse, collapsing weekly reporting from 12 hours to 45 minutes and enabling same-day product decisions.</p>
+                <div class="project-tags"><span>SQL</span><span>ETL</span><span>Data Modeling</span><span>Power BI</span></div>
+            </div>
+            <div class="project-card">
+                <div class="project-icon">&#128197;</div>
+                <h3>Faculty Scheduling App</h3>
+                <p>Built a Python Flask scheduling application used by 150+ faculty at UW–Milwaukee, eliminating a manual email process that caused recurring double-bookings.</p>
+                <div class="project-tags"><span>Python</span><span>Flask</span><span>SQL</span><span>Web App</span></div>
+            </div>
+            <div class="project-card">
+                <div class="project-icon">&#128666;</div>
+                <h3>Amazon Fulfillment Analytics</h3>
+                <p>Identified delivery bottlenecks via SQL &amp; Redshift that reduced SLA breaches by 9% and improved delivery accuracy by 12%. Replaced static reports with real-time dashboards.</p>
+                <div class="project-tags"><span>Redshift</span><span>SQL</span><span>QuickSight</span><span>Python</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+    <div class="container fade-up">
+        <p class="section-label">Credentials</p>
+        <h2 class="section-title">Certifications &amp; Awards</h2>
+        <div class="cert-grid">
+            <div class="cert-card">
+                <div class="cert-icon">&#9729;&#65039;</div>
+                <div class="cert-info">
+                    <h4>AWS Certified Cloud Practitioner</h4>
+                    <p>Amazon Web Services · Mar 2024</p>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">&#128202;</div>
+                <div class="cert-info">
+                    <h4>Google Advanced Data Analytics</h4>
+                    <p>Google · Aug 2024</p>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">&#127941;</div>
+                <div class="cert-info">
+                    <h4>Professional Scrum Master I</h4>
+                    <p>Scrum.org · Aug 2025</p>
+                </div>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">&#127942;</div>
+                <div class="cert-info">
+                    <h4>Best Employee Award</h4>
+                    <p>Amazon · Q1–Q3, 2020–2021</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+    <div class="container fade-up">
+        <p class="section-label">Let's Connect</p>
+        <h2 class="section-title">Ready to Work Together?</h2>
+        <p class="section-desc" style="margin-left:auto;margin-right:auto;">Whether you need a data analyst, an AI-augmented analytics partner, or someone to build your next insight pipeline — I'd love to hear from you.</p>
+        <div class="contact-links">
+            <a href="mailto:Skhurshid1998@gmail.com" class="contact-card">
+                <span class="c-icon">&#9993;&#65039;</span> Skhurshid1998@gmail.com
+            </a>
+            <a href="tel:+14142042304" class="contact-card">
+                <span class="c-icon">&#128241;</span> +1 (414) 204-2304
+            </a>
+            <a href="https://linkedin.com/in/" class="contact-card" target="_blank" rel="noopener">
+                <span class="c-icon">&#128188;</span> LinkedIn
+            </a>
+            <a href="https://github.com/" class="contact-card" target="_blank" rel="noopener">
+                <span class="c-icon">&#128025;</span> GitHub
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    &copy; 2026 Khurshid Shaik. Built with <a href="#">AI-assisted development</a>. All rights reserved.
+</footer>
+
+<script>
+    function closeNav() {
+        document.querySelector('.nav-links').classList.remove('active');
+    }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
