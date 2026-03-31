@@ -1,1 +1,3 @@
 # Khurshidshaik.github.io
+
+Personal portfolio website showcasing data analytics, AI/ML projects, and professional experience. Built with HTML/CSS and AI-assisted development.
