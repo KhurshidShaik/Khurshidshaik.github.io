@@ -1,4 +1,5 @@
 Hey, I'm Khurshid.
+
 I make data talk — and make sure the right people hear it.
 Data, Product & AI Analyst. 5+ years. 
 I sit at the intersection of data engineering, product analytics, and AI.
