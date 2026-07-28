@@ -1,1 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khurshid Shaik — Data Analyst</title>
+<meta name="description" content="Khurshid Shaik — Data Analyst with 4+ years at Amazon and Abnormal AI. Production-grade SQL, dashboards teams trust, and A/B experiments that drive real decisions.">
+<meta property="og:title" content="Khurshid Shaik — Data Analyst">
+<meta property="og:description" content="Turning messy data into decisions people can act on. 4+ years across Amazon and Abnormal AI.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0a0b10">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0b10'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='26' font-weight='bold' fill='%239d8cff' text-anchor='middle'%3EKS%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b10;--bg2:#12141c;--panel:rgba(255,255,255,.025);
+    --ink:#edeef2;--ink-soft:#8b90a0;--line:rgba(255,255,255,.09);
+    --accent:#9d8cff;--accent2:#5ee0c8;
+    --display:"Bricolage Grotesque",sans-serif;--body:"Inter",system-ui,sans-serif;--mono:"JetBrains Mono",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 34px}
+  ::selection{background:var(--accent);color:#0a0b10}
 
+  nav{position:sticky;top:0;z-index:60;background:rgba(10,11,16,.7);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;justify-content:space-between;align-items:center;padding:18px 34px;max-width:1080px;margin:0 auto}
+  .brand{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.02em}
+  .brand b{color:var(--accent)}
+  .nav-links{display:flex;gap:30px}
+  .nav-links a{position:relative;text-decoration:none;color:var(--ink-soft);font-size:14px;font-weight:500;transition:color .2s}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--accent);transition:width .28s ease}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a:hover::after{width:100%}
+  @media(max-width:720px){.nav-links{display:none}}
+  .nav-right{display:flex;align-items:center;gap:22px}
+  .nav-resume{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-decoration:none;color:var(--accent);border:1px solid var(--line);padding:8px 16px;border-radius:100px;transition:border-color .2s,color .2s;white-space:nowrap}
+  .nav-resume:hover{border-color:var(--accent);color:var(--ink)}
+  .avatar{width:92px;height:92px;border-radius:50%;overflow:hidden;position:relative;margin-bottom:26px;border:1px solid var(--line);box-shadow:0 0 0 5px rgba(157,140,255,.09);display:flex;align-items:center;justify-content:center;background:var(--bg2)}
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  .avatar span{display:none;font-family:var(--display);font-weight:600;font-size:32px;color:var(--accent)}
+  .avatar.noimg span{display:block}
+  #loader{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .6s ease}
+  #loader.done{opacity:0;pointer-events:none}
+  #loader .lbrand{font-family:var(--mono);font-size:20px;color:var(--ink);letter-spacing:.04em}
+  #loader .lbrand b{color:var(--accent)}
+  #loader .lnum{font-family:var(--display);font-weight:600;font-size:54px;letter-spacing:-.02em;background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  #loader .lbar{width:180px;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
+  #loader .lbar span{display:block;height:100%;width:0;background:var(--accent);transition:width .12s linear}
+  #loader .ltxt{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft)}
+  .tour-toggle{position:fixed;right:22px;bottom:22px;z-index:120;display:inline-flex;align-items:center;gap:10px;background:rgba(18,20,28,.92);backdrop-filter:blur(10px);border:1px solid var(--line);color:var(--ink-soft);cursor:pointer;font-family:var(--mono);font-size:12px;letter-spacing:.06em;padding:12px 18px;border-radius:100px;transition:border-color .2s,color .2s}
+  .tour-toggle:hover{border-color:var(--accent);color:var(--ink)}
+  .tour-toggle.active{border-color:var(--accent);color:var(--accent)}
+  .tour-toggle.speaking .eq i{animation:eq .9s ease-in-out infinite}
+  .tour-toggle.speaking .eq i:nth-child(2){animation-delay:.15s}
+  .tour-toggle.speaking .eq i:nth-child(3){animation-delay:.3s}
+  .tour-toggle.speaking .eq i:nth-child(4){animation-delay:.45s}
+
+  section{padding:104px 0;position:relative}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent)}
+  h2{font-family:var(--display);font-weight:600;font-size:clamp(30px,4.5vw,46px);line-height:1.05;margin-bottom:38px;letter-spacing:-.02em}
+
+  .hero{position:relative;min-height:92vh;display:flex;align-items:center;border-bottom:1px solid var(--line);overflow:hidden}
+  #field{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+  .hero-inner{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:0 34px;width:100%;pointer-events:none;display:grid;grid-template-columns:1.12fr .88fr;gap:36px;align-items:center}
+  .hero-copy{min-width:0}
+  .hero-avatar{position:relative;display:flex;justify-content:center;align-items:center;pointer-events:none}
+  .hero-avatar::before{content:"";position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:76%;height:76%;border-radius:50%;background:radial-gradient(circle,rgba(157,140,255,.30),rgba(94,224,200,.10),transparent 68%);filter:blur(26px);z-index:-1;opacity:.6;transition:opacity .4s}
+  .hero-avatar img{width:auto;max-width:100%;max-height:500px;filter:drop-shadow(0 26px 44px rgba(0,0,0,.55));animation:float 5.5s ease-in-out infinite}
+  .hero-avatar.speaking::before{animation:glowpulse 1.15s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @keyframes glowpulse{0%,100%{opacity:.45}50%{opacity:1}}
+  @media(max-width:840px){.hero-inner{grid-template-columns:1fr;gap:12px}.hero-avatar img{max-height:290px}}
+  .hero-inner a,.hero-inner *{pointer-events:auto}
+  .hero .tag{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:24px}
+  .hero h1{font-family:var(--display);font-weight:600;font-size:clamp(42px,8vw,80px);line-height:.98;letter-spacing:-.035em;margin-bottom:26px;max-width:16ch}
+  .hero h1 em{font-style:normal;background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{font-size:19px;color:var(--ink-soft);max-width:560px;margin-bottom:38px}
+  .btns{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:15px 30px;border-radius:100px;font-size:15px;font-weight:500;text-decoration:none;transition:transform .18s ease,background .2s,border-color .2s,color .2s;will-change:transform}
+  .btn-solid{background:var(--accent);color:#0a0b10}
+  .btn-solid:hover{background:#b0a2ff}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .btn-voice{display:inline-flex;align-items:center;gap:10px;background:transparent;border:1px solid var(--line);color:var(--ink);cursor:pointer;font-family:var(--body);font-size:15px;font-weight:500;padding:15px 26px;border-radius:100px;transition:border-color .2s,color .2s}
+  .btn-voice:hover{border-color:var(--accent2);color:var(--accent2)}
+  .eq{display:inline-flex;align-items:center;gap:3px;height:16px}
+  .eq i{width:3px;height:5px;background:currentColor;border-radius:2px;display:block;transition:height .2s}
+  .btn-voice.speaking .eq i{animation:eq .9s ease-in-out infinite}
+  .btn-voice.speaking .eq i:nth-child(2){animation-delay:.15s}
+  .btn-voice.speaking .eq i:nth-child(3){animation-delay:.3s}
+  .btn-voice.speaking .eq i:nth-child(4){animation-delay:.45s}
+  @keyframes eq{0%,100%{height:5px}50%{height:16px}}
+  .scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);opacity:.7;animation:bob 2.4s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,6px)}}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:56px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 20px}
+  .stat .n{font-family:var(--display);font-weight:600;font-size:30px;letter-spacing:-.02em;background:linear-gradient(120deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .l{font-size:13px;color:var(--ink-soft);margin-top:6px}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+  .about-grid p{font-size:17px;color:var(--ink-soft);margin-bottom:18px}
+  .about-grid p:last-child{margin-bottom:0}
+  .method{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:8px 24px}
+  .step{display:flex;align-items:baseline;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:none}
+  .step b{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:500}
+  .step span{font-size:15px}
+  @media(max-width:720px){.about-grid{grid-template-columns:1fr;gap:34px}}
+
+  .xp{border-left:1px solid var(--line);padding-left:30px;margin-left:6px}
+  .job{position:relative;padding-bottom:46px}
+  .job:last-child{padding-bottom:0}
+  .job::before{content:"";position:absolute;left:-36px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--bg)}
+  .job-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+  .job-head h3{font-family:var(--display);font-weight:600;font-size:23px;letter-spacing:-.01em}
+  .job-head .co{color:var(--accent)}
+  .job-date{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.04em}
+  .job ul{list-style:none;margin-top:14px;display:grid;gap:10px}
+  .job li{position:relative;padding-left:20px;font-size:15px;color:var(--ink-soft)}
+  .job li::before{content:"→";position:absolute;left:0;color:var(--accent2);font-size:13px}
+
+  .skill-row{display:grid;grid-template-columns:190px 1fr;gap:26px;padding:24px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .skill-row:last-child{border-bottom:none}
+  .skill-label{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+  .tags{display:flex;flex-wrap:wrap;gap:10px}
+  .tag{border:1px solid var(--line);padding:9px 16px;border-radius:100px;font-size:13.5px;font-weight:500;color:var(--ink);transition:border-color .2s,color .2s,transform .2s;cursor:default}
+  .tag:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  @media(max-width:600px){.skill-row{grid-template-columns:1fr;gap:12px}}
+
+  .proj{position:relative;border:1px solid var(--line);border-radius:18px;background:var(--bg2);margin-bottom:22px;overflow:hidden;transition:transform .25s ease,border-color .25s ease}
+  .proj::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .3s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(157,140,255,.14),transparent 55%);pointer-events:none}
+  .proj:hover{transform:translateY(-3px);border-color:rgba(157,140,255,.4)}
+  .proj:hover::before{opacity:1}
+  .proj-strip{display:flex;justify-content:space-between;align-items:center;padding:18px 30px;border-bottom:1px solid var(--line)}
+  .proj-strip .num{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;color:var(--accent)}
+  .proj-strip .st{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft)}
+  .proj h3{font-family:var(--display);font-weight:600;font-size:23px;padding:24px 30px 0;letter-spacing:-.01em;position:relative;z-index:1}
+  .proj-body{padding:18px 30px 30px;display:grid;grid-template-columns:1fr 1fr;gap:22px 44px;position:relative;z-index:1}
+  .field .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+  .field .v{font-size:15px;color:var(--ink-soft)}
+  @media(max-width:600px){.proj-body{grid-template-columns:1fr}}
+
+  .cred{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .cred-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px 26px}
+  .cred-card .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .cred-card p{font-size:15px;color:var(--ink-soft);margin:0}
+  .cred-card strong{color:var(--ink);font-weight:500}
+  @media(max-width:600px){.cred{grid-template-columns:1fr}}
+
+  .contact{border-top:1px solid var(--line)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px}
+  .links a{display:block;text-decoration:none;color:var(--ink);padding:15px 0;border-bottom:1px solid var(--line);transition:color .2s,padding-left .2s}
+  .links a:hover{color:var(--accent);padding-left:8px}
+  .links a span{font-family:var(--mono);font-size:11px;color:var(--ink-soft);display:block;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+  .links a b{font-size:16px;font-weight:500}
+  form label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin:16px 0 6px}
+  form input,form textarea{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:10px;font-family:var(--body);font-size:15px;background:var(--panel);color:var(--ink)}
+  form input:focus,form textarea:focus{outline:none;border-color:var(--accent)}
+  form textarea{resize:vertical;min-height:96px}
+  form button{margin-top:22px;width:100%;cursor:pointer;border:none}
+  @media(max-width:720px){.contact-grid{grid-template-columns:1fr;gap:34px}}
+
+  footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.05em}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}.scrollcue{display:none}}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="lbrand">KS<b>.</b></div>
+  <div class="lnum" id="lnum">0%</div>
+  <div class="lbar"><span id="lfill"></span></div>
+  <div class="ltxt">Loading experience</div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand">KS<b>.</b>analyst</div>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#work">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="Khurshid_Shaik_resume.pdf" class="nav-resume" target="_blank" rel="noopener">Résumé ↓</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="hero">
+  <canvas id="field"></canvas>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <div class="tag">Data Analyst · 4+ years</div>
+      <h1>Finding the <em>signal</em> in the noise.</h1>
+      <p>I'm Khurshid Shaik — a data analyst who turns transactional and behavioral data into decisions people act on. Production-grade SQL, dashboards teams trust, and experiments that separate what works from what only looks like it does.</p>
+      <div class="btns">
+        <a href="#work" class="btn btn-solid magnetic">View work</a>
+        <a href="#contact" class="btn btn-ghost magnetic">Get in touch</a>
+        <button id="voiceBtn" class="btn-voice" aria-label="Hear a spoken introduction">
+          <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span id="voiceLabel">Hear about me</span>
+        </button>
+      </div>
+    </div>
+    <div class="hero-avatar" id="heroAvatar">
+      <img src="avatar-girl.svg" alt="Illustrated avatar">
+    </div>
+  </div>
+  <div class="scrollcue">scroll ↓ move your cursor</div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow reveal">About</div>
+    <div class="about-grid">
+      <div class="method reveal">
+        <div class="step"><b>01</b><span>Find the real question</span></div>
+        <div class="step"><b>02</b><span>Clean the data honestly</span></div>
+        <div class="step"><b>03</b><span>Explore before concluding</span></div>
+        <div class="step"><b>04</b><span>Report the "so what"</span></div>
+      </div>
+      <div class="reveal">
+        <p>I've spent 4+ years in high-growth tech turning messy datasets into insights and enterprise-grade dashboard suites. My SQL is production-grade — window functions, CTEs, complex joins, query optimization — across Snowflake, Redshift, and Databricks, with dbt models structured for self-service analysis.</p>
+        <p>I care more about the decision than the dashboard. I document metric definitions and data logic so stakeholders trust and reuse every number, and I partner with product teams to design rigorous A/B tests — power analyses, sample-size calculations, and real significance testing — not vanity metrics.</p>
+        <p>My strength is the unglamorous middle: the dirty rows, the double-counted records, the assumption everyone forgot to check — then translating what's left into plain language anyone can act on.</p>
+      </div>
+    </div>
+    <div class="stats reveal">
+      <div class="stat"><div class="n">500K+</div><div class="l">security events analyzed daily</div></div>
+      <div class="stat"><div class="n">~15%</div><div class="l">lift in threat-detection accuracy</div></div>
+      <div class="stat"><div class="n">20+</div><div class="l">leaders on dashboards I built</div></div>
+      <div class="stat"><div class="n">10+ hrs</div><div class="l">manual work automated / week</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow reveal">Experience</div>
+    <h2 class="reveal">Where I've done the work</h2>
+    <div class="xp">
+      <div class="job reveal">
+        <div class="job-head"><h3><span class="co">Abnormal AI</span> — Data Analyst</h3><span class="job-date">Feb 2024 — Present</span></div>
+        <ul>
+          <li>Engineered analytical datasets powering AI account-compromise detection over 500K+ security events daily in Python/Pandas, contributing to a ~15% lift in detection accuracy.</li>
+          <li>Surfaced trends and anomalies across 5+ TB of telemetry in Databricks (Spark) — adopted by security and incident-response teams.</li>
+          <li>Built Airflow + dbt pipelines and Snowflake models, plus a centralized data dictionary giving analysts and leadership trusted, self-service numbers.</li>
+          <li>Automated recurring reporting with Python and Looker, pushing real-time KPI alerts to 5+ Slack channels.</li>
+        </ul>
+      </div>
+      <div class="job reveal">
+        <div class="job-head"><h3><span class="co">Amazon</span> — Data Analyst</h3><span class="job-date">Aug 2020 — Oct 2022</span></div>
+        <ul>
+          <li>Built executive dashboards in Tableau, Power BI, and QuickSight adopted by 20+ leaders across 10+ fulfillment centers.</li>
+          <li>Designed A/B experiments end to end with PMs — power analyses, sample-size calcs, two-proportion Z-tests — on rollouts that lifted engagement.</li>
+          <li>Segmented users with multivariate regression and cluster analysis in Python, informing storefront improvements product teams adopted.</li>
+          <li>Automated financial reporting in Python, eliminating 10+ hours of manual work per week.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="eyebrow reveal">Projects</div>
+    <h2 class="reveal">Built to decide</h2>
+
+    <div class="proj reveal spot">
+      <div class="proj-strip"><span class="num">PROJECT 01 · AI ADOPTION</span><span class="st">trending</span></div>
+      <h3>What developers actually adopt in the AI era</h3>
+      <div class="proj-body">
+        <div class="field"><div class="k">The question</div><div class="v">If you sold developer tools, where would you bet — which AI tools are crossing from hype into daily use, and among which developers?</div></div>
+        <div class="field"><div class="k">The approach</div><div class="v">Reshape the 90K-respondent Stack Overflow Developer Survey, then segment AI-tool adoption by role, experience, and company size — testing where the gaps are statistically real, not noise.</div></div>
+        <div class="field"><div class="k">The decision it drives</div><div class="v">Names the single segment where AI tooling is stickiest — a clear "focus product and marketing here" call, delivered as an interactive dashboard.</div></div>
+        <div class="field"><div class="k">Stack</div><div class="v">Python (pandas), SQL, Tableau · Stack Overflow Survey (open data)</div></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 30px 22px;border-top:1px solid var(--line);position:relative;z-index:1">
+        <span style="font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:#5a5f70">status: to build</span>
+        <span style="display:flex;gap:18px">
+          <a href="https://github.com/KhurshidShaik" style="font-family:var(--mono);font-size:12px;color:var(--accent);text-decoration:none">view code →</a>
+          <a href="https://public.tableau.com/" style="font-family:var(--mono);font-size:12px;color:var(--accent2);text-decoration:none">live dashboard →</a>
+        </span>
+      </div>
+    </div>
+
+    <div class="proj reveal spot">
+      <div class="proj-strip"><span class="num">PROJECT 02 · EXPERIMENTATION</span><span class="st">decisive</span></div>
+      <h3>Ship it or kill it: an A/B test post-mortem</h3>
+      <div class="proj-body">
+        <div class="field"><div class="k">The question</div><div class="v">A team ran an experiment on a new checkout flow. The topline looks up — but should it actually ship?</div></div>
+        <div class="field"><div class="k">The approach</div><div class="v">Validate the randomization (sample-ratio mismatch), measure lift with two-proportion Z-tests and confidence intervals, run a power and sample-size check, and rule out peeking.</div></div>
+        <div class="field"><div class="k">The decision it drives</div><div class="v">A defensible ship / no-ship verdict with the statistics behind it — plus exactly what would have to change to flip the call.</div></div>
+        <div class="field"><div class="k">Stack</div><div class="v">Python (pandas, statsmodels), SQL · public e-commerce A/B dataset</div></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 30px 22px;border-top:1px solid var(--line);position:relative;z-index:1">
+        <span style="font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:#5a5f70">status: to build</span>
+        <span style="display:flex;gap:18px">
+          <a href="https://github.com/KhurshidShaik" style="font-family:var(--mono);font-size:12px;color:var(--accent);text-decoration:none">view code →</a>
+          <a href="https://nbviewer.org/" style="font-family:var(--mono);font-size:12px;color:var(--accent2);text-decoration:none">read notebook →</a>
+        </span>
+      </div>
+    </div>
+
+    <div class="proj reveal spot">
+      <div class="proj-strip"><span class="num">PROJECT 03 · RETENTION</span><span class="st">decisive</span></div>
+      <h3>Why subscribers leave — and who to save first</h3>
+      <div class="proj-body">
+        <div class="field"><div class="k">The question</div><div class="v">With a fixed retention budget, which customers should we spend it on to save the most revenue?</div></div>
+        <div class="field"><div class="k">The approach</div><div class="v">Cohort analysis plus a churn model on a subscription dataset to surface the behaviors that precede cancellation, then rank customers by churn-risk × value.</div></div>
+        <div class="field"><div class="k">The decision it drives</div><div class="v">The two or three signals that precede churn and the high-value segment where a retention offer pays back fastest — a targeting list, not just a chart.</div></div>
+        <div class="field"><div class="k">Stack</div><div class="v">Python (pandas, scikit-learn), SQL, Power BI · Telco Churn (open data)</div></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 30px 22px;border-top:1px solid var(--line);position:relative;z-index:1">
+        <span style="font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:#5a5f70">status: to build</span>
+        <span style="display:flex;gap:18px">
+          <a href="https://github.com/KhurshidShaik" style="font-family:var(--mono);font-size:12px;color:var(--accent);text-decoration:none">view code →</a>
+          <a href="https://app.powerbi.com/" style="font-family:var(--mono);font-size:12px;color:var(--accent2);text-decoration:none">live dashboard →</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow reveal">Skills</div>
+    <h2 class="reveal">The toolkit</h2>
+    <div class="skill-row reveal"><div class="skill-label">Languages &amp; querying</div><div class="tags"><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Pandas / NumPy</span><span class="tag">DAX</span><span class="tag">M</span><span class="tag">Git</span></div></div>
+    <div class="skill-row reveal"><div class="skill-label">Warehouses &amp; data eng</div><div class="tags"><span class="tag">Snowflake</span><span class="tag">Redshift</span><span class="tag">Databricks / Spark</span><span class="tag">dbt</span><span class="tag">Airflow</span><span class="tag">Presto</span><span class="tag">Hive</span><span class="tag">Data modeling</span></div></div>
+    <div class="skill-row reveal"><div class="skill-label">BI &amp; visualization</div><div class="tags"><span class="tag">Tableau</span><span class="tag">Power BI</span><span class="tag">Looker</span><span class="tag">QuickSight</span><span class="tag">Pendo</span><span class="tag">Google Analytics</span><span class="tag">Alteryx</span><span class="tag">Excel (advanced)</span></div></div>
+    <div class="skill-row reveal"><div class="skill-label">Analytics &amp; stats</div><div class="tags"><span class="tag">A/B testing</span><span class="tag">Two-proportion Z-tests</span><span class="tag">Multivariate regression</span><span class="tag">Cluster analysis</span><span class="tag">Cohort &amp; churn analysis</span><span class="tag">Metrics design</span><span class="tag">Root-cause analysis</span></div></div>
+    <div class="skill-row reveal"><div class="skill-label">Cloud</div><div class="tags"><span class="tag">AWS S3</span><span class="tag">CloudWatch</span><span class="tag">DynamoDB</span></div></div>
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="wrap">
+    <div class="eyebrow reveal">Credentials</div>
+    <div class="cred">
+      <div class="cred-card reveal">
+        <div class="k">Education</div>
+        <p><strong>M.S., Information Technology Management</strong><br>University of Wisconsin–Milwaukee · 2024</p>
+      </div>
+      <div class="cred-card reveal">
+        <div class="k">Certifications</div>
+        <p><strong>AWS Certified Cloud Practitioner</strong><br>Google Advanced Data Analytics<br>Tableau Visualization Fundamentals</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="eyebrow reveal">Contact</div>
+    <h2 class="reveal">Let's talk</h2>
+    <div class="contact-grid">
+      <div class="links reveal">
+        <a href="mailto:khurshid2567@gmail.com"><span>Email</span><b>khurshid2567@gmail.com</b></a>
+        <a href="https://www.linkedin.com/in/khurshidsk"><span>LinkedIn</span><b>linkedin.com/in/khurshidsk</b></a>
+        <a href="https://github.com/KhurshidShaik" target="_blank" rel="noopener"><span>GitHub</span><b>github.com/KhurshidShaik</b></a>
+      </div>
+      <form class="reveal" onsubmit="event.preventDefault();this.querySelector('button').textContent='Message sent';">
+        <label for="name">Name</label>
+        <input id="name" type="text" required>
+        <label for="email">Email</label>
+        <input id="email" type="email" required>
+        <label for="msg">Message</label>
+        <textarea id="msg" required></textarea>
+        <button type="submit" class="btn btn-solid">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<button id="tourBtn" class="tour-toggle" aria-pressed="false" aria-label="Toggle spoken guided tour">
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span id="tourLabel">Guided tour</span>
+</button>
+
+<footer>© 2026 Khurshid Shaik — Data Analyst · Signal, not noise</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canvas = document.getElementById('field');
+  var hero = document.getElementById('hero');
+  var ctx = canvas.getContext('2d');
+  var pts = [], W=0, H=0, dpr = Math.min(window.devicePixelRatio||1, 2);
+  var mouse = {x:-9999,y:-9999};
+  function size(){
+    W = hero.clientWidth; H = hero.clientHeight;
+    canvas.width = W*dpr; canvas.height = H*dpr;
+    canvas.style.width=W+'px'; canvas.style.height=H+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    var count = Math.max(38, Math.min(90, Math.floor(W*H/16000)));
+    pts = [];
+    for(var i=0;i<count;i++){ pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:Math.random()*1.6+1.1}); }
+  }
+  size(); window.addEventListener('resize', size);
+  hero.addEventListener('mousemove', function(e){ var r=hero.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top; });
+  hero.addEventListener('mouseleave', function(){ mouse.x=-9999; mouse.y=-9999; });
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<pts.length;i++){
+      var p=pts[i]; p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;
+      var dx=p.x-mouse.x,dy=p.y-mouse.y,d=Math.sqrt(dx*dx+dy*dy),near=d<150;
+      if(near){ var a=(1-d/150); ctx.strokeStyle='rgba(157,140,255,'+(a*.55)+')'; ctx.lineWidth=.7; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke(); }
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.283);
+      ctx.fillStyle = near ? 'rgba(180,168,255,'+(0.5+(1-d/150)*0.5)+')' : 'rgba(140,146,165,0.32)'; ctx.fill();
+    }
+    for(var a=0;a<pts.length;a++){ for(var b=a+1;b<pts.length;b++){ var ex=pts[a].x-pts[b].x,ey=pts[a].y-pts[b].y,dd=ex*ex+ey*ey; if(dd<10000){ ctx.strokeStyle='rgba(255,255,255,'+(0.05*(1-dd/10000))+')'; ctx.lineWidth=.5; ctx.beginPath(); ctx.moveTo(pts[a].x,pts[a].y); ctx.lineTo(pts[b].x,pts[b].y); ctx.stroke(); } } }
+    requestAnimationFrame(draw);
+  }
+  if(reduce){ for(var i=0;i<pts.length;i++){ var p=pts[i]; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.283); ctx.fillStyle='rgba(140,146,165,0.3)'; ctx.fill(); } }
+  else { draw(); }
+  document.querySelectorAll('.spot').forEach(function(card){ card.addEventListener('mousemove', function(e){ var r=card.getBoundingClientRect(); card.style.setProperty('--mx',(e.clientX-r.left)+'px'); card.style.setProperty('--my',(e.clientY-r.top)+'px'); }); });
+  if(!reduce){ document.querySelectorAll('.magnetic').forEach(function(btn){ btn.addEventListener('mousemove', function(e){ var r=btn.getBoundingClientRect(); var mx=e.clientX-(r.left+r.width/2),my=e.clientY-(r.top+r.height/2); btn.style.transform='translate('+(mx*.25)+'px,'+(my*.35)+'px)'; }); btn.addEventListener('mouseleave', function(){ btn.style.transform=''; }); }); }
+  var vbtn=document.getElementById('voiceBtn'), vlabel=document.getElementById('voiceLabel');
+  var synth=window.speechSynthesis;
+  var voiceScript="Hi — I'm Khurshid Shaik, a data analyst with more than four years of experience turning messy data into decisions people can act on. At Abnormal AI, I build datasets from over half a million security events every day — work that helped improve threat-detection accuracy by about fifteen percent. Earlier, at Amazon, I built executive dashboards used by more than twenty leaders across ten fulfillment centers, and designed A B experiments that showed product teams what actually worked. I care more about the decision than the dashboard. Thanks for stopping by — take a look around, and let's talk.";
+  var chosenVoice=null;
+  function pickVoice(){
+    if(!synth)return; var vs=synth.getVoices(); if(!vs.length)return;
+    chosenVoice = vs.filter(function(v){return /^en/i.test(v.lang);}).sort(function(a,b){
+      var score=function(v){var s=0; if(/google/i.test(v.name))s+=3; if(/natural|aria|jenny|samantha|zira/i.test(v.name))s+=2; if(/en-US/i.test(v.lang))s+=1; return s;};
+      return score(b)-score(a);
+    })[0] || vs[0];
+  }
+  if(synth){ pickVoice(); synth.onvoiceschanged=pickVoice; }
+  function resetVoiceBtn(){ vbtn.classList.remove('speaking'); vlabel.textContent='Hear about me'; var ha=document.getElementById('heroAvatar'); if(ha)ha.classList.remove('speaking'); }
+  function speak(){
+    if(!synth){ vlabel.textContent='Voice not supported here'; return; }
+    if(synth.speaking && !synth.paused){ synth.pause(); vbtn.classList.remove('speaking'); vlabel.textContent='Paused — tap to resume'; return; }
+    if(synth.paused){ synth.resume(); vbtn.classList.add('speaking'); vlabel.textContent='Speaking…'; return; }
+    var u=new SpeechSynthesisUtterance(voiceScript);
+    if(chosenVoice)u.voice=chosenVoice; u.rate=1; u.pitch=1;
+    u.onstart=function(){ vbtn.classList.add('speaking'); vlabel.textContent='Speaking…'; var ha=document.getElementById('heroAvatar'); if(ha)ha.classList.add('speaking'); };
+    u.onend=resetVoiceBtn; u.onerror=resetVoiceBtn;
+    synth.cancel(); synth.speak(u);
+  }
+  if(vbtn){ vbtn.addEventListener('click',speak); }
+  window.addEventListener('beforeunload',function(){ if(synth)synth.cancel(); });
+
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+})();
+</script>
+
+<script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var loader=document.getElementById('loader');
+  if(loader){
+    if(reduce){ loader.classList.add('done'); setTimeout(function(){loader.remove();},600); }
+    else{
+      var n=0, lnum=document.getElementById('lnum'), lfill=document.getElementById('lfill');
+      var t=setInterval(function(){
+        n+=Math.floor(Math.random()*11)+7; if(n>=100){ n=100; clearInterval(t);
+          setTimeout(function(){ loader.classList.add('done'); setTimeout(function(){ if(loader)loader.remove(); },650); },260);
+        }
+        lnum.textContent=n+'%'; lfill.style.width=n+'%';
+      },95);
+    }
+  }
+
+  var synth=window.speechSynthesis;
+  var tourBtn=document.getElementById('tourBtn'), tourLabel=document.getElementById('tourLabel');
+  var on=false, active=null, voice=null;
+  var lines={
+    hero:"Welcome. I'm Khurshid Shaik, a data analyst who turns messy data into decisions people can act on.",
+    about:"Over four-plus years I've turned transactional and behavioral data into insights and dashboards teams trust. I care more about the decision than the dashboard.",
+    experience:"At Abnormal AI I analyze over half a million security events a day, helping lift detection accuracy by about fifteen percent. At Amazon I built dashboards used by more than twenty leaders and ran rigorous A B tests.",
+    work:"Three projects, each built to end in a decision: which AI tools developers actually adopt, a ship-or-kill A B test verdict, and churn targeting that says who to save first.",
+    skills:"My toolkit spans SQL and Python, Snowflake, Redshift and Databricks, Tableau, Power BI and Looker, plus A B testing and applied statistics.",
+    credentials:"A master's in Information Technology Management, plus AWS, Google Advanced Data Analytics, and Tableau certifications.",
+    contact:"That's me. If it resonates, let's talk — reach me by email or the form right here."
+  };
+  function pick(){ if(!synth)return; var vs=synth.getVoices(); if(!vs.length)return;
+    voice=vs.filter(function(v){return /^en/i.test(v.lang);}).sort(function(a,b){
+      var s=function(v){var x=0;if(/google/i.test(v.name))x+=3;if(/natural|aria|jenny|samantha|zira/i.test(v.name))x+=2;if(/en-US/i.test(v.lang))x+=1;return x;};
+      return s(b)-s(a);})[0]||vs[0];
+  }
+  if(synth){ pick(); synth.onvoiceschanged=pick; }
+  function say(id){
+    if(!synth||!lines[id])return;
+    var u=new SpeechSynthesisUtterance(lines[id]); if(voice)u.voice=voice; u.rate=1; u.pitch=1;
+    u.onstart=function(){tourBtn.classList.add('speaking');var ha=document.getElementById('heroAvatar');if(ha)ha.classList.add('speaking');};
+    u.onend=function(){tourBtn.classList.remove('speaking');var ha=document.getElementById('heroAvatar');if(ha)ha.classList.remove('speaking');};
+    u.onerror=function(){tourBtn.classList.remove('speaking');var ha=document.getElementById('heroAvatar');if(ha)ha.classList.remove('speaking');};
+    synth.cancel(); synth.speak(u);
+  }
+  var ids=['hero','about','experience','work','skills','credentials','contact'];
+  var obs=new IntersectionObserver(function(entries){
+    if(!on)return;
+    entries.forEach(function(e){ if(e.isIntersecting){ var id=e.target.id; if(id&&id!==active){ active=id; say(id); } } });
+  },{rootMargin:'-45% 0px -45% 0px', threshold:0});
+  ids.forEach(function(id){ var el=document.getElementById(id); if(el)obs.observe(el); });
+  function currentSection(){
+    var cur=null, best=1e9;
+    ids.forEach(function(id){ var el=document.getElementById(id); if(!el)return;
+      var r=el.getBoundingClientRect(); var d=Math.abs(r.top+r.height/2-window.innerHeight/2);
+      if(r.bottom>0 && r.top<window.innerHeight && d<best){ best=d; cur=id; } });
+    return cur;
+  }
+  function toggle(){
+    on=!on; tourBtn.setAttribute('aria-pressed', on?'true':'false');
+    if(on){ tourBtn.classList.add('active'); tourLabel.textContent='Guided tour: on'; active=currentSection(); if(active)say(active); }
+    else{ tourBtn.classList.remove('active','speaking'); tourLabel.textContent='Guided tour'; if(synth)synth.cancel(); active=null; }
+  }
+  if(tourBtn)tourBtn.addEventListener('click',toggle);
+  window.addEventListener('beforeunload',function(){ if(synth)synth.cancel(); });
+})();
+</script>
+</body>
+</html>
