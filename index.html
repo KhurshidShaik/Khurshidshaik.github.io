@@ -43,6 +43,12 @@
   .avatar img{width:100%;height:100%;object-fit:cover;display:block}
   .avatar span{display:none;font-family:var(--display);font-weight:600;font-size:32px;color:var(--accent)}
   .avatar.noimg span{display:block}
+  .guide{width:46px;height:46px;flex:0 0 auto;display:block}
+  .eyebrow{align-items:center}
+  .eyebrow .guide{margin-right:4px}
+  .guide.talking{animation:guidepulse 1s ease-in-out infinite}
+  @keyframes guidepulse{0%,100%{filter:drop-shadow(0 0 2px var(--ga));transform:scale(1)}50%{filter:drop-shadow(0 0 12px var(--ga));transform:scale(1.08)}}
+
   #loader{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .6s ease}
   #loader.done{opacity:0;pointer-events:none}
   #loader .lbrand{font-family:var(--mono);font-size:20px;color:var(--ink);letter-spacing:.04em}
@@ -66,15 +72,8 @@
 
   .hero{position:relative;min-height:92vh;display:flex;align-items:center;border-bottom:1px solid var(--line);overflow:hidden}
   #field{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-  .hero-inner{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:0 34px;width:100%;pointer-events:none;display:grid;grid-template-columns:1.12fr .88fr;gap:36px;align-items:center}
+  .hero-inner{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:0 34px;width:100%;pointer-events:none;}
   .hero-copy{min-width:0}
-  .hero-avatar{position:relative;display:flex;justify-content:center;align-items:center;pointer-events:none}
-  .hero-avatar::before{content:"";position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:76%;height:76%;border-radius:50%;background:radial-gradient(circle,rgba(157,140,255,.30),rgba(94,224,200,.10),transparent 68%);filter:blur(26px);z-index:-1;opacity:.6;transition:opacity .4s}
-  .hero-avatar img{width:auto;max-width:100%;max-height:500px;filter:drop-shadow(0 26px 44px rgba(0,0,0,.55));animation:float 5.5s ease-in-out infinite}
-  .hero-avatar.speaking::before{animation:glowpulse 1.15s ease-in-out infinite}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-  @keyframes glowpulse{0%,100%{opacity:.45}50%{opacity:1}}
-  @media(max-width:840px){.hero-inner{grid-template-columns:1fr;gap:12px}.hero-avatar img{max-height:290px}}
   .hero-inner a,.hero-inner *{pointer-events:auto}
   .hero .tag{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:24px}
   .hero h1{font-family:var(--display);font-weight:600;font-size:clamp(42px,8vw,80px);line-height:.98;letter-spacing:-.035em;margin-bottom:26px;max-width:16ch}
@@ -176,6 +175,23 @@
 </head>
 <body>
 
+
+<svg style="display:none" aria-hidden="true"><defs><symbol id="gbust" viewBox="0 0 64 64">
+<circle cx="32" cy="32" r="30" fill="#12141c" stroke="var(--ga)" stroke-width="1.6"/>
+<path d="M14,64 C14,48 22,42 32,42 C42,42 50,48 50,64 Z" fill="#1b1e28"/>
+<line x1="32" y1="48" x2="32" y2="62" stroke="var(--ga)" stroke-width="1.8" opacity=".8"/>
+<circle cx="32" cy="26" r="12.5" fill="#eeba97"/>
+<path d="M19,26 C19,14 26,9 32,9 C40,9 45,15 45,24 C45,28 44,30 45,33 C41,25 39,22 35,21.5 C34,17 24,17 22,25 C21,28 20,30 19,33 C18.5,30 18.6,28 19,26 Z" fill="#1a1c26"/>
+<path d="M14,30 C14,44 18,52 22,58 L18,58 C15,50 13,42 14,30 Z" fill="#1a1c26"/>
+<path d="M50,30 C50,44 46,52 42,58 L46,58 C49,50 51,42 50,30 Z" fill="#1a1c26"/>
+<rect x="21.5" y="23" width="9" height="6.5" rx="3" fill="#0a0b10"/>
+<rect x="33.5" y="23" width="9" height="6.5" rx="3" fill="#0a0b10"/>
+<rect x="30" y="24.6" width="4" height="1.6" rx=".8" fill="#0a0b10"/>
+<path d="M22,24 Q26,23 30,24" stroke="var(--ga)" stroke-width=".9" fill="none" opacity=".85"/>
+<path d="M34,24 Q38,23 42,24" stroke="var(--ga)" stroke-width=".9" fill="none" opacity=".85"/>
+<path d="M29,33.5 Q32,35.5 35,33.5" stroke="#b96b64" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+</symbol></defs></svg>
+
 <div id="loader">
   <div class="lbrand">KS<b>.</b></div>
   <div class="lnum" id="lnum">0%</div>
@@ -215,16 +231,14 @@
         </button>
       </div>
     </div>
-    <div class="hero-avatar" id="heroAvatar">
-      <img src="avatar-girl.svg" alt="Illustrated avatar">
-    </div>
+    
   </div>
   <div class="scrollcue">scroll ↓ move your cursor</div>
 </header>
 
 <section id="about">
   <div class="wrap">
-    <div class="eyebrow reveal">About</div>
+    <div class="eyebrow reveal"><svg class="guide" style="--ga:#9d8cff"><use href="#gbust"/></svg>About</div>
     <div class="about-grid">
       <div class="method reveal">
         <div class="step"><b>01</b><span>Find the real question</span></div>
@@ -249,7 +263,7 @@
 
 <section id="experience">
   <div class="wrap">
-    <div class="eyebrow reveal">Experience</div>
+    <div class="eyebrow reveal"><svg class="guide" style="--ga:#5ee0c8"><use href="#gbust"/></svg>Experience</div>
     <h2 class="reveal">Where I've done the work</h2>
     <div class="xp">
       <div class="job reveal">
@@ -276,7 +290,7 @@
 
 <section id="work">
   <div class="wrap">
-    <div class="eyebrow reveal">Projects</div>
+    <div class="eyebrow reveal"><svg class="guide" style="--ga:#f2a65a"><use href="#gbust"/></svg>Projects</div>
     <h2 class="reveal">Built to decide</h2>
 
     <div class="proj reveal spot">
@@ -337,7 +351,7 @@
 
 <section id="skills">
   <div class="wrap">
-    <div class="eyebrow reveal">Skills</div>
+    <div class="eyebrow reveal"><svg class="guide" style="--ga:#6ab6ff"><use href="#gbust"/></svg>Skills</div>
     <h2 class="reveal">The toolkit</h2>
     <div class="skill-row reveal"><div class="skill-label">Languages &amp; querying</div><div class="tags"><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">Pandas / NumPy</span><span class="tag">DAX</span><span class="tag">M</span><span class="tag">Git</span></div></div>
     <div class="skill-row reveal"><div class="skill-label">Warehouses &amp; data eng</div><div class="tags"><span class="tag">Snowflake</span><span class="tag">Redshift</span><span class="tag">Databricks / Spark</span><span class="tag">dbt</span><span class="tag">Airflow</span><span class="tag">Presto</span><span class="tag">Hive</span><span class="tag">Data modeling</span></div></div>
@@ -349,7 +363,7 @@
 
 <section id="credentials">
   <div class="wrap">
-    <div class="eyebrow reveal">Credentials</div>
+    <div class="eyebrow reveal"><svg class="guide" style="--ga:#e08cff"><use href="#gbust"/></svg>Credentials</div>
     <div class="cred">
       <div class="cred-card reveal">
         <div class="k">Education</div>
@@ -365,7 +379,7 @@
 
 <section id="contact" class="contact">
   <div class="wrap">
-    <div class="eyebrow reveal">Contact</div>
+    <div class="eyebrow reveal"><svg class="guide" style="--ga:#7ef29b"><use href="#gbust"/></svg>Contact</div>
     <h2 class="reveal">Let's talk</h2>
     <div class="contact-grid">
       <div class="links reveal">
@@ -442,14 +456,14 @@
     })[0] || vs[0];
   }
   if(synth){ pickVoice(); synth.onvoiceschanged=pickVoice; }
-  function resetVoiceBtn(){ vbtn.classList.remove('speaking'); vlabel.textContent='Hear about me'; var ha=document.getElementById('heroAvatar'); if(ha)ha.classList.remove('speaking'); }
+  function resetVoiceBtn(){ vbtn.classList.remove('speaking'); vlabel.textContent='Hear about me';  }
   function speak(){
     if(!synth){ vlabel.textContent='Voice not supported here'; return; }
     if(synth.speaking && !synth.paused){ synth.pause(); vbtn.classList.remove('speaking'); vlabel.textContent='Paused — tap to resume'; return; }
     if(synth.paused){ synth.resume(); vbtn.classList.add('speaking'); vlabel.textContent='Speaking…'; return; }
     var u=new SpeechSynthesisUtterance(voiceScript);
     if(chosenVoice)u.voice=chosenVoice; u.rate=1; u.pitch=1;
-    u.onstart=function(){ vbtn.classList.add('speaking'); vlabel.textContent='Speaking…'; var ha=document.getElementById('heroAvatar'); if(ha)ha.classList.add('speaking'); };
+    u.onstart=function(){ vbtn.classList.add('speaking'); vlabel.textContent='Speaking…';  };
     u.onend=resetVoiceBtn; u.onerror=resetVoiceBtn;
     synth.cancel(); synth.speak(u);
   }
@@ -500,9 +514,9 @@
   function say(id){
     if(!synth||!lines[id])return;
     var u=new SpeechSynthesisUtterance(lines[id]); if(voice)u.voice=voice; u.rate=1; u.pitch=1;
-    u.onstart=function(){tourBtn.classList.add('speaking');var ha=document.getElementById('heroAvatar');if(ha)ha.classList.add('speaking');};
-    u.onend=function(){tourBtn.classList.remove('speaking');var ha=document.getElementById('heroAvatar');if(ha)ha.classList.remove('speaking');};
-    u.onerror=function(){tourBtn.classList.remove('speaking');var ha=document.getElementById('heroAvatar');if(ha)ha.classList.remove('speaking');};
+    u.onstart=function(){tourBtn.classList.add('speaking');document.querySelectorAll('.guide.talking').forEach(function(g){g.classList.remove('talking');});var sec=document.getElementById(id);var g=sec?sec.querySelector('.guide'):null;if(g)g.classList.add('talking');};
+    u.onend=function(){tourBtn.classList.remove('speaking');document.querySelectorAll('.guide.talking').forEach(function(g){g.classList.remove('talking');});};
+    u.onerror=function(){tourBtn.classList.remove('speaking');document.querySelectorAll('.guide.talking').forEach(function(g){g.classList.remove('talking');});};
     synth.cancel(); synth.speak(u);
   }
   var ids=['hero','about','experience','work','skills','credentials','contact'];
@@ -521,7 +535,7 @@
   function toggle(){
     on=!on; tourBtn.setAttribute('aria-pressed', on?'true':'false');
     if(on){ tourBtn.classList.add('active'); tourLabel.textContent='Guided tour: on'; active=currentSection(); if(active)say(active); }
-    else{ tourBtn.classList.remove('active','speaking'); tourLabel.textContent='Guided tour'; if(synth)synth.cancel(); active=null; }
+    else{ tourBtn.classList.remove('active','speaking'); tourLabel.textContent='Guided tour'; if(synth)synth.cancel(); active=null; document.querySelectorAll('.guide.talking').forEach(function(g){g.classList.remove('talking');});  }
   }
   if(tourBtn)tourBtn.addEventListener('click',toggle);
   window.addEventListener('beforeunload',function(){ if(synth)synth.cancel(); });
